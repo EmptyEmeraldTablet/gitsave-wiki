@@ -5,12 +5,14 @@ export default defineConfig({
   description: "gitsave 使用文档与游戏存档指南",
   lang: "zh-CN",
   lastUpdated: true,
+  cleanUrls: true,
+  srcDir: "docs",
   themeConfig: {
     nav: [
       { text: "首页", link: "/" },
-      { text: "使用指南", link: "/guide/" },
+      { text: "使用指南", link: "/guide" },
       { text: "游戏存档", link: "/games/" },
-      { text: "维护", link: "/maintenance/" }
+      { text: "维护", link: "/maintenance" }
     ],
     sidebar: {
       "/guide/": [
