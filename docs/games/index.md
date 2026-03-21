@@ -10,4 +10,4 @@
 
 ## 目录
 
-- [slay the spire 2](/docs/games/Slay-the-spire2.md)
+- [Slay the Spire 2](/games/Slay-the-spire2)
