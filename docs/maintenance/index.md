@@ -2,4 +2,4 @@
 
 此部分说明文档更新与发布流程，便于多人协作与持续迭代。
 
-- [更新工作流](/maintenance/workflow/)
+- [更新工作流](/maintenance/workflow)
