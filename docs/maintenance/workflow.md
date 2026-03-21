@@ -19,7 +19,7 @@
 ## Cloudflare Pages 配置
 
 - Build command：`npm run docs:build`
-- Output directory：`docs/.vitepress/dist`
+- Output directory：`.vitepress/dist`
 - Root directory：仓库根目录
 
 如需使用 pnpm，请在项目根目录添加 `pnpm-lock.yaml` 并调整构建命令为 `pnpm docs:build`。

@@ -5,8 +5,6 @@ export default defineConfig({
   description: "gitsave 使用文档与游戏存档指南",
   lang: "zh-CN",
   lastUpdated: true,
-  srcDir: "docs",
-  ignoreDeadLinks: true,
   themeConfig: {
     nav: [
       { text: "首页", link: "/" },
