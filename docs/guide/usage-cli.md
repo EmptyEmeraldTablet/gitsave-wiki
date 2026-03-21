@@ -1,0 +1,216 @@
+# 命令参考
+
+本文件列出 gitsave 的完整指令与常用示例。建议在终端里使用 `gitsave --help` 获取最新信息。
+
+## init
+
+初始化存档仓库。
+
+```bash
+gitsave init [PATH]
+```
+
+选项：
+- `-f, --force`：强制在已有 gitsave 仓库中重新初始化（谨慎使用）
+
+示例：
+
+```bash
+gitsave init
+```
+
+## save
+
+保存当前游戏状态。
+
+```bash
+gitsave save [-m MESSAGE] [DESC]
+```
+
+- `-m, --message`：指定保存描述
+- `DESC`：可选的描述（与 `-m` 二选一即可）
+
+行为：
+- 保存前执行“存档稳定性检测”，避免保存到未完成写入的存档。
+- 当检测到存档仍在变化时，提示用户选择“强制保存 / 稍后再试 / 取消”。
+
+示例：
+
+```bash
+gitsave save "击败第一个Boss"
+```
+
+## amend
+
+修改最新存档描述（仅 HEAD）。
+
+```bash
+gitsave amend [-m MESSAGE] [DESC]
+```
+
+- `-m, --message`：指定新描述
+- `DESC`：可选的新描述（与 `-m` 二选一即可）
+
+行为：
+- 仅允许修改当前 HEAD 的提交信息。
+- 工作区必须干净（有未保存更改会拒绝）。
+
+## load
+
+回滚到存档。回滚时会在目标提交上创建并切换到新路线。
+
+```bash
+gitsave load [OPTIONS] [IDENTIFIER]
+```
+
+- `-l, --list`：列出所有存档
+- `-p, --preview`：预览模式，不实际回滚
+- `-f, --force`：强制回滚（丢弃未保存更改）
+- `-t, --tag TAG`：通过标签回滚
+- `-r, --route ROUTE`：回滚后创建并切换的新路线名（不提供则提示输入）
+- `IDENTIFIER`：短哈希或存档描述
+
+示例：
+
+```bash
+gitsave load --list
+gitsave load --route chapter1 a1b2c3d
+gitsave load --route "重要选择-分支" "重要选择"
+gitsave load --route ending-a --tag "最终存档"
+```
+
+行为：
+- 回滚总是创建新路线并切换过去，原路线不受影响。
+- 脏工作区下默认拒绝回滚，需显式选择"保存/丢弃/取消"后继续。
+
+## recovery
+
+恢复"丢弃快照"路线。
+
+```bash
+gitsave recovery --list
+gitsave recovery <HASH_PREFIX> [--name NAME]
+```
+
+行为：
+- 执行丢弃操作（discard）时会自动生成"丢弃快照"路线。
+- `recovery --list` 仅列出这些快照路线。
+- 进入恢复时需要重命名；名称为空时默认 `recovery-<short_hash>`。
+- 恢复后会切换到新路线，快照不再出现在恢复列表中。
+
+## status
+
+查看当前仓库状态。
+
+```bash
+gitsave status
+```
+
+## history
+
+查看存档历史。
+
+```bash
+gitsave history [OPTIONS]
+```
+
+- `-v, --verbose`：显示详细时间信息
+- `-r, --route ROUTE`：筛选特定路线的历史
+
+说明：
+- 默认隐藏"丢弃快照"路线记录，可通过 `gitsave recovery --list` 查看。
+
+## compare
+
+比较两个存档之间的差异。
+
+```bash
+gitsave compare <SAVE1> <SAVE2>
+```
+
+## route
+
+路线管理（相当于游戏分支）。
+
+```bash
+gitsave route [OPTIONS] [COMMAND]
+```
+
+- `-l, --list`：列出路线
+
+子命令：
+
+```bash
+gitsave route list
+gitsave route create <NAME>
+gitsave route switch <NAME>
+gitsave route switch -c <NAME>   # 创建并切换
+gitsave route delete <NAME>
+gitsave route rename <OLD> <NEW>
+```
+
+行为：
+- `route create/switch` 在工作区脏时默认拒绝，需要显式确认保存或丢弃更改。
+
+## tag
+
+对关键存档打标。
+
+```bash
+gitsave tag [OPTIONS] [NAME] [MESSAGE]
+```
+
+- `-l, --list`：列出标签
+- `-d, --delete`：删除标签
+
+示例：
+
+```bash
+gitsave tag "boss-1" "击败Boss"
+gitsave tag --list
+gitsave tag --delete "boss-1"
+```
+
+## export / import
+
+导出/导入仓库（目前为占位，功能待完善）。
+
+```bash
+gitsave export <PATH>
+gitsave import <PATH>
+```
+
+## config
+
+查看或设置配置。
+
+```bash
+gitsave config [--set KEY=VALUE]
+```
+
+## autosave
+
+自动保存配置（默认关闭，自动保存暂不实现）。
+
+```bash
+gitsave autosave [OPTIONS]
+```
+
+说明：
+- 当前仅保留配置入口与状态展示，不会自动触发保存任务。
+
+- `--enable`：启用
+- `--disable`：禁用
+- `--interval SECONDS`：设置间隔（>= 60 秒）
+- `--max_count COUNT`：设置最大保存数量（1-100）
+- `--status`：查看当前配置
+
+## tui
+
+启动 TUI：
+
+```bash
+gitsave tui
+```
+
+TUI 交互说明详见 `docs/TUI.md`。
