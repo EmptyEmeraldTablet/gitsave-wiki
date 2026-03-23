@@ -14,10 +14,10 @@ Slay the spire 2
 - 是否需要重启游戏才能回滚：是
 
 ## 推荐流程
+- 游戏只会在玩家开始新游戏时、每一幕的初始三选一选择后、玩家选择点击地图上下一层等时进行保存。
+- 实际测试显示，`profile[]\saves\history\` 也会参与存档的加载，同时也是游戏进度的一部分。因此建议的存档路径是 `C:\Users\电脑用户名\AppData\Roaming\SlayTheSpire2\steam\Steam UID\profile[]\saves`下进行`gitsave init .` 。
 
-- 实际测试显示，`profile[]\history\` 也会参与存档的加载，同时也是游戏进度的一部分。因此建议的存档路径是 `C:\Users\电脑用户名\AppData\Roaming\SlayTheSpire2\steam\Steam UID\profile[]`下进行`gitsave init .` 。
-
-- 在开始新游戏进入涅奥的初始界面时，游戏的核心存档文件`current_run.save`才会生成。同时在游戏结束时（死亡/胜利），存档文件会被自动删除，然后在`profile[]/history/`下生成此局游戏的记录文件。因此建议在boss战前需要存档的做存档操作，否则只能通过丢弃修改回到非常靠前的地方。
+- 在开始新游戏进入涅奥的初始界面时，游戏的核心存档文件`current_run.save`才会生成。同时在游戏结束时（死亡/胜利），存档文件会被自动删除，然后在`profile[]\saves\history\`下生成此局游戏的记录文件。因此建议在boss战前需要存档的做存档操作，否则只能通过丢弃修改回到非常靠前的地方。
 
 - 使用discard功能支持清理脏工作区，此操作意味着可以回退到上一个存档点，适用于快速回退。
 

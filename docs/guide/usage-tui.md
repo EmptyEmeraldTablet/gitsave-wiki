@@ -1,6 +1,8 @@
 # TUI 交互说明
 
-TUI 使用 `gitsave tui` 启动。进入前请确保目标目录已执行 `gitsave init`。
+TUI 使用 `gitsave tui` 启动。
+
+当前已经支持初始化tui面板管理常用存档路径，可以在初始化面板进行路径初始化。
 
 ## 界面布局
 
