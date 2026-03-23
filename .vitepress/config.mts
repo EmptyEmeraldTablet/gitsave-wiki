@@ -12,7 +12,14 @@ export default defineConfig({
       { text: "首页", link: "/" },
       { text: "使用指南", link: "/guide" },
       { text: "游戏存档", link: "/games/" },
-      { text: "维护", link: "/maintenance" }
+      { text: "维护", link: "/maintenance" },
+      {
+        text: "源码",
+        items: [
+          { text: "gitsave", link: "https://github.com/EmptyEmeraldTablet/gitsave" },
+          { text: "gitsave-wiki", link: "https://github.com/EmptyEmeraldTablet/gitsave-wiki" }
+        ]
+      }
     ],
     sidebar: {
       "/guide/": [
